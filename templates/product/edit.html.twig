@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Einkaufsliste - Bearbeiten{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+
+<div class="container">
+    <h1>Produkt bearbeiten</h1>
+    {{ form_start(form) }}
+        <div class="row mb-4">
+            <div class="col">
+                {{ form_label(form.amount, "Anzahl") }}
+                {{ form_widget(form.amount) }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                {{ form_label(form.name, "Name") }}
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+
+        <div class="row mb-2 ml-0">
+            <div class="col-xs-1 mr-2">
+                {{ form_row(form.submit, { 'label': 'Speichern'}) }}
+            </div>
+
+            <div class="col-xs-1">
+                {{ form_row(form.cancel, { 'label': 'Abbrechen'}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

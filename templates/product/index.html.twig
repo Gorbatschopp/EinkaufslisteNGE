@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Einkaufsliste{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+
+<div class="container">
+    <h1>Einkaufsliste</h1>
+    <div class="row mb-4">
+        <div class="col-sm-1"><strong>ID</strong></div>
+        <div class="col-sm-2"><strong>Anzahl</strong></div>
+        <div class="col-sm-3"><strong>Name</strong></div>
+        <div class="col-sm-3"><strong>Bearbeiten</strong></div>
+        <div class="col-sm-3"><strong>Löschen</strong></div>
+    </div>
+    {% for product in products %}
+        <div class="row mb-4">
+            <div class="col-sm-1">{{ product.id }}</div>
+            <div class="col-sm-2">{{ product.amount }}</div>
+            <div class="col-sm-3">{{ product.name }}</div>
+            <div class="col-sm-3"><button type="button" onclick="location.href=('/edit/{{product.id}}');" class="btn btn-info">Bearbeiten</button></div>
+            <div class="col-sm-3">
+                <a href='/deleteMySQL/{{product.id}}' onclick="return confirm('Möchten Sie diesen Datensatz wirklich löschen?');" class="btn btn-danger">X</a>
+                {# <button type="button" onclick="confirm('are you sure?'); location.href=('/deleteMySQL/{{product.id}}');" class="btn btn-danger">X</button> #}
+            </div>
+        </div>
+    {% endfor %}
+
+   
+
+    <h1>Neues Produkt hinzufügen:</h1>
+    {{ form_start(form) }}
+        <div class="row mb-12">
+            <div class="col">
+                {{ form_label(form.amount, "Anzahl") }}
+                {{ form_widget(form.amount) }}
+            </div>
+        </div>
+
+        <div class="row mb-12">
+            <div class="col">
+                {{ form_label(form.name, "Name") }}
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+        <br/>
+        <div class="row mb-12">
+            <div class="col">
+                {{ form_row(form.submit, { 'label': 'Hinzufügen'}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
